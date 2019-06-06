@@ -35,7 +35,10 @@ enum planck_keycodes {
   DVORAK,
   PLOVER,
   BACKLIT,
-  EXT_PLV
+  EXT_PLV,
+  AUTO_SQ,
+  AUTO_PA,
+  AUTO_CB
 };
 
 #define LOWER MO(_LOWER)
@@ -135,19 +138,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise - new
  * ,-----------------------------------------------------------------------------------.
- * |   `  |  F1  |  F2  |  F3  |  F4  |      |   7  |   8  |   9  |   -  |   +  | Bksp |
+ * |   `  |  F1  |  F2  |  F3  |  F4  |  {}  |   7  |   8  |   9  |   -  |   +  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  F5  |  F6  |  F7  |  F8  |      |   4  |   5  |   6  |   +  |   /  |      |
+ * | Del  |  F5  |  F6  |  F7  |  F8  |  ()  |   4  |   5  |   6  |   +  |   /  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F9  |  F10 |  F11 |  F12 |      |   1  |   2  |   3  |Vol - |Vol + |      |
+ * |      |  F9  |  F10 |  F11 |  F12 |  []  |   1  |   2  |   3  |Vol - |Vol + |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      0      |      | Home |Pg Dn |Pg Up | End  |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_grid(
-    KC_GRV,  KC_F1,   KC_F2,    KC_F3,    KC_F4,   _______,  KC_7,  KC_8, KC_9,  KC_MINS, KC_PLUS, KC_BSPC,
-    KC_DEL,  KC_F5,   KC_F6,    KC_F7,    KC_F8,   _______,  KC_4,  KC_5, KC_6,  KC_PLUS, KC_SLSH, KC_BSLS,
-    _______, KC_F9,   KC_F10,   KC_F11,   KC_F12,  _______,  KC_1,  KC_2, KC_3,  KC_PGUP, KC_VOLU, _______,
+    KC_GRV,  KC_F1,   KC_F2,    KC_F3,    KC_F4,   AUTO_CB,  KC_7,  KC_8, KC_9,  KC_MINS, KC_PLUS, KC_BSPC,
+    KC_DEL,  KC_F5,   KC_F6,    KC_F7,    KC_F8,   AUTO_PA,  KC_4,  KC_5, KC_6,  KC_PLUS, KC_SLSH, KC_BSLS,
+    _______, KC_F9,   KC_F10,   KC_F11,   KC_F12,  AUTO_SQ,  KC_1,  KC_2, KC_3,  KC_PGUP, KC_VOLU, _______,
     _______, _______, _______, _______, _______, KC_0, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
@@ -261,6 +264,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           PLAY_SONG(plover_gb_song);
         #endif
         layer_off(_PLOVER);
+      }
+      return false;
+      break;
+    case AUTO_SQ:
+      if (record->event.pressed) {
+        SEND_STRING("[]SS_TAP(X_LEFT)");
+      }
+      return false;
+      break;
+    case AUTO_CB:
+      if (record->event.pressed) {
+        SEND_STRING("{}SS_TAP(X_LEFT)");
+      }
+      return false;
+      break;
+    case AUTO_PA:
+      if (record->event.pressed) {
+        SEND_STRING("()SS_TAP(X_LEFT)");
       }
       return false;
       break;
