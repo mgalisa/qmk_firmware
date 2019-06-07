@@ -26,10 +26,7 @@ enum planck_layers {
   _LOWER,
   _RAISE,
   _PLOVER,
-<<<<<<< HEAD
   _EMOJI,
-=======
->>>>>>> 6b3f4e0892378cad56dfbb00db4550bc3848ebf8
   _ADJUST
 };
 
@@ -42,12 +39,8 @@ enum planck_keycodes {
   EXT_PLV,
   AUTO_SQ,
   AUTO_PA,
-<<<<<<< HEAD
   AUTO_CB,
   SHRUG
-=======
-  AUTO_CB
->>>>>>> 6b3f4e0892378cad56dfbb00db4550bc3848ebf8
 };
 
 #define LOWER MO(_LOWER)
@@ -181,16 +174,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
-<<<<<<< HEAD
 [_EMOJI] = LAYOUT_planck_grid(
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
-    _______, _______, _______, SHRUG, _______, _______, _______, _______, _______,  _______, _______, _______,
+    KC_TRNS, _______, _______, SHRUG, _______, _______, _______, _______, _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 ),
 
-=======
->>>>>>> 6b3f4e0892378cad56dfbb00db4550bc3848ebf8
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
  * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
@@ -304,15 +294,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-<<<<<<< HEAD
     case SHRUG:
       if (record->event.pressed) {
         SEND_STRING("/shrugSS_TAP(X_ENT)");
       }
       return false;
       break;
-=======
->>>>>>> 6b3f4e0892378cad56dfbb00db4550bc3848ebf8
   }
   return true;
 }
